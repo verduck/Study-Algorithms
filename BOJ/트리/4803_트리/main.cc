@@ -98,14 +98,29 @@ int main() {
     }
 
     vector<int> parent = ds.get_parent();
-    set<int> tree(parent.begin(), parent.end());
+    set<int> tree;
 
-    if (tree.size() - graph.size() == 0) {
+    for (int i : parent) {
+      tree.insert(ds.find_set(i));
+    }
+
+    int count = tree.size();
+    vector<bool> visited(n, false);
+
+    for (int i : graph) {
+      int x = ds.find_set(i);
+      if (!visited[x] && tree.find(x) != tree.end()) {
+        visited[x] = true;
+        count--;
+      }
+    }
+
+    if (count == 0) {
       cout << "Case " << c << ": No trees.\n";
-    } else if (tree.size() - graph.size() == 1) {
+    } else if (count == 1) {
       cout << "Case " << c << ": There is one tree.\n";
     } else {
-      cout << "Case " << c << ": A forest of " << tree.size() - graph.size() << " trees.\n";
+      cout << "Case " << c << ": A forest of " << count << " trees.\n";
     }
     c++;
   }
