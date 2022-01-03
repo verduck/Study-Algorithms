@@ -104,6 +104,10 @@ int main() {
       tree.insert(ds.find_set(i));
     }
 
+    for (int i : parent) {
+      tree.insert(ds.find_set(i));
+    }
+
     int count = tree.size();
     vector<bool> visited(n, false);
 
