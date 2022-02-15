@@ -1,0 +1,15 @@
+{
+  "files.associations": {
+    "iostream": "cpp",
+    "vector": "cpp",
+    "algorithm": "cpp",
+    "chrono": "cpp",
+    "limits": "cpp",
+    "random": "cpp",
+    "utility": "cpp",
+    "iterator": "cpp",
+    "memory": "cpp",
+    "xutility": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "Disabled"
+}
