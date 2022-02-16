@@ -20,6 +20,7 @@ void dfs(int n, const vector<int>& info, vector<int>& answer, int index) {
                 lion += score;
             }
         }
+        
         if (lion > apeach) {
             int diff = lion - apeach;
             if (diff == g_max) {

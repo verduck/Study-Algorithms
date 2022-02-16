@@ -9,7 +9,8 @@
     "utility": "cpp",
     "iterator": "cpp",
     "memory": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "variant": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
