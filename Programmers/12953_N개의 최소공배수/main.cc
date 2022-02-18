@@ -14,6 +14,7 @@ int solution(vector<int> arr) {
 
     return answer;
 }
+
 int main() {
     vector<int> arr = { 2,6,8,14 };
     int result = solution(arr);
