@@ -1,32 +1,21 @@
 #include <iostream>
-#include <string>
 
 using namespace std;
 
-string solution(string s) {
-    string answer = "";
-    int n = 0;
+int solution(int n) {
+    int answer = 0;
 
-    for (char ch : s) {
-        if (ch == ' ') {
-            n = 0;
-            answer += ch;
-            continue;
+    for (int i = 1; i <= n; i++) {
+        if (!(n % i)) {
+            answer += i;
         }
-        if (n % 2) {
-            answer += tolower(ch);
-        } else {
-            answer += toupper(ch);
-        }
-        n++;
     }
-
     return answer;
 }
 
 int main() {
-    string s = "try hello world";
-    string result = solution(s);
+    int n = 12;
+    int result = solution(n);
     cout << result << '\n';
     return 0;
 }
