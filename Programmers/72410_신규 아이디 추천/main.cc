@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -45,6 +44,12 @@ string solution(string new_id) {
         if (*it == '.') {
             it = new_id.erase(it);
         }
+    }
+
+    it = new_id.end() - 1;
+
+    while (new_id.size() <= 2) {
+        new_id += *it;
     }
     
     answer = new_id;
