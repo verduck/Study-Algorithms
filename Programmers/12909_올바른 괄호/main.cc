@@ -8,19 +8,20 @@ bool solution(string s) {
     bool answer = true;
     stack<char> st;
 
-    for (const char ch : s) {
+    for (char ch : s) {
         if (ch == '(') {
             st.push(ch);
-        } else if (ch == ')') {
-            if (st.empty()) {
+        } else {
+            if (!st.empty()) {
+                st.pop();
+            } else {
                 return false;
             }
-            st.pop();
         }
     }
 
     answer = st.empty();
-    
+
     return answer;
 }
 
