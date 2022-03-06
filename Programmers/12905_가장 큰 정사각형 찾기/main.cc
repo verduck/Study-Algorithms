@@ -6,7 +6,7 @@ using namespace std;
 
 bool all_zero(const vector<vector<int>>& board) {
     for (int i = 0; i < board.size(); i++) {
-        for (int j = 0; j < board[j].size(); j++) {
+        for (int j = 0; j < board[i].size(); j++) {
             if (board[i][j]) {
                 return false;
             }
@@ -26,7 +26,7 @@ int solution(vector<vector<int>> board) {
     for (int i = 1; i < board.size(); i++) {
         for (int j = 1; j < board[i].size(); j++) {
             if (board[i][j] != 0) {
-                board[i][j] = min(min(board[i - 1][j], board[i][j - 1]), board[i - 1][j - 1]) + 1;
+                board[i][j] = min(board[i - 1][j], min(board[i][j - 1], board[i - 1][j - 1])) + 1;
                 answer = max(answer, board[i][j]);
             }
         }
