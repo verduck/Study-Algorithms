@@ -2,44 +2,41 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 
 vector<string> split(string s, char delimiter) {
-    vector<string> answer;
+    vector<string> result;
     stringstream ss(s);
     string temp;
 
     while (getline(ss, temp, delimiter)) {
-        answer.push_back(temp);
-    }
-
-    return answer;
-}
-
-string n_to_string(int n, int m) {
-    string result;
-    vector<char> v{ '0','1','2','3','4','5','6','7','8','9' };
-
-    if (m == 0) {
-        return string(1, v[0]);
-    }
-
-    while (m != 0) {
-        result = v[m % n] + result;
-        m /= n;
+        result.push_back(temp);
     }
 
     return result;
 }
 
-bool is_prime_number(long n) {
+string n_to_string(int n, int k) {
+    string s;
+
+    while (n) {
+        s += (n % k) + '0';
+        n /= k;
+    }
+    reverse(s.begin(), s.end());
+
+    return s;
+}
+
+bool isPrimeNum(long n) {
     if (n <= 1) {
         return false;
     }
 
     for (long i = 2; i * i <= n; i++) {
-        if (n % i == 0) {
+        if (!(n % i)) {
             return false;
         }
     }
@@ -47,32 +44,27 @@ bool is_prime_number(long n) {
 }
 
 int solution(int n, int k) {
-    int answer = -1;
-    string str;
-    if (k != 10) {
-        str = n_to_string(k, n);
-    }
-    else {
-        str = to_string(n);
-    }
-    vector<string> nums = split(str, '0');
+    int answer = 0;
 
-    for (const string& s : nums) {
+    string kstring = n_to_string(n, k);
+
+    vector<string> v = split(kstring, '0');
+
+    for (const string& s : v) {
         if (!s.empty()) {
             long m = stol(s);
-            if (is_prime_number(m)) {
+            if (isPrimeNum(m)) {
                 answer++;
             }
         }
     }
 
-    answer++;
     return answer;
 }
 
 int main() {
-    int n = 437674;
-    int k = 3;
+    int n = 110011;
+    int k = 10;
     int result = solution(n, k);
     cout << result << "\n";
     return 0;
