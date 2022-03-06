@@ -4,24 +4,17 @@
 
 using namespace std;
 
-int solution(vector<vector<int> > land) {
+int solution(vector<vector<int>> land) {
     int answer = 0;
-    vector<vector<int>> memo(land.size() + 1, vector<int>(4, 0));
 
-    for (int i = 0; i < land.size(); i++) {
-        for (int j = 0; j < 4; j++) {
-            memo[i + 1][j] = land[i][j];
-        }
+    for (int i = 1; i < land.size(); i++) {
+        land[i][0] = max(land[i][0] + land[i - 1][1], max(land[i][0] + land[i - 1][2], land[i][0] + land[i - 1][3]));
+        land[i][1] = max(land[i][1] + land[i - 1][0], max(land[i][1] + land[i - 1][2], land[i][1] + land[i - 1][3]));
+        land[i][2] = max(land[i][2] + land[i - 1][0], max(land[i][2] + land[i - 1][1], land[i][2] + land[i - 1][3]));
+        land[i][3] = max(land[i][3] + land[i - 1][0], max(land[i][3] + land[i - 1][1], land[i][3] + land[i - 1][2]));
     }
 
-    for (int i = 1; i < memo.size(); i++) {
-        memo[i][0] = max(memo[i][0] + memo[i - 1][1], max(memo[i][0] + memo[i - 1][2], memo[i][0] + memo[i - 1][3]));
-        memo[i][1] = max(memo[i][1] + memo[i - 1][0], max(memo[i][1] + memo[i - 1][2], memo[i][1] + memo[i - 1][3]));
-        memo[i][2] = max(memo[i][2] + memo[i - 1][0], max(memo[i][2] + memo[i - 1][1], memo[i][2] + memo[i - 1][3]));
-        memo[i][3] = max(memo[i][3] + memo[i - 1][0], max(memo[i][3] + memo[i - 1][1], memo[i][3] + memo[i - 1][2]));
-    }
-
-    answer = *max_element(memo[land.size()].begin(), memo[land.size()].end());
+    answer = *max_element(land[land.size() - 1].begin(), land[land.size() - 1].end());
 
     return answer;
 }
