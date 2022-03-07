@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <climits>
 #include <queue>
+#include <climits>
 #include <algorithm>
 
 using namespace std;
@@ -10,15 +10,16 @@ using namespace std;
 int bfs(const vector<vector<int>>& graph, vector<bool>& visited, int v) {
     int count = 0;
     queue<int> q;
+
     q.push(v);
 
     while (!q.empty()) {
-        int c = q.front();
+        v = q.front();
         q.pop();
-        visited[c] = true;
+        visited[v] = true;
         count++;
 
-        for (int n : graph[c]) {
+        for (int n : graph[v]) {
             if (!visited[n]) {
                 q.push(n);
             }
@@ -42,18 +43,16 @@ int solution(int n, vector<vector<int>> wires) {
             }
         }
 
-        vector<int> counts;
-        for (int i = 0; i < graph.size(); i++) {
-            if (!visited[i]) {
-                int count = bfs(graph, visited, i);
-                counts.push_back(count);
+        vector<int> v;
+        for (int j = 0; j < n; j++) {
+            if (!visited[j]) {
+                int count = bfs(graph, visited, j);
+                v.push_back(count);
             }
         }
 
-        int diff = abs(counts[0] - counts[1]);
-        answer = min(answer, diff);
+        answer = min(answer, abs(v[0] - v[1]));
     }
-
     return answer;
 }
 
