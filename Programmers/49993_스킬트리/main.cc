@@ -6,11 +6,12 @@ using namespace std;
 
 int solution(string skill, vector<string> skill_trees) {
     int answer = 0;
-    for (const string& skill_tree : skill_trees) {
+
+    for (const string& s : skill_trees) {
         int index = 0;
         bool success = true;
-        for (const char ch : skill_tree) {
-            int f = skill.find(ch);
+        for (char c : s) {
+            int f = skill.find(c);
             if (f != string::npos) {
                 if (f <= index) {
                     index++;
