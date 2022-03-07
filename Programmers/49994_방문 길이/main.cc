@@ -5,21 +5,14 @@
 
 using namespace std;
 
-const vector<pair<int, int>> dxy = {
-    { 0, -1 },
-    { 1, 0 },
-    { 0, 1 },
-    { -1, 0 }
+const unordered_map<char, pair<int, int>> direction = {
+    { 'U', { 0, -1 } },
+    { 'D', { 0, 1 } },
+    { 'R', { 1, 0 } },
+    { 'L', { -1, 0 } }
 };
 
-const unordered_map<char, int> dir = {
-    { 'U', 0 },
-    { 'R', 1 },
-    { 'D', 2 },
-    { 'L', 3 }
-};
-
-const unordered_map<char, char> reverse_dir = {
+const unordered_map<char, char> reverse_direction = {
     { 'U', 'D' },
     { 'D', 'U' },
     { 'R', 'L' },
@@ -28,35 +21,29 @@ const unordered_map<char, char> reverse_dir = {
 
 int solution(string dirs) {
     int answer = 0;
-    vector<vector<vector<bool>>> visited(11, vector<vector<bool>>(11, vector<bool>(4, false)));
-    int x = 5;
-    int y = 5;
-
-    for (char ch : dirs) {
-        int d = dir.at(ch);
-        int rd = (d + 2) % 4;
-        pair<int, int> p = dxy[d];
-        int nx = x + p.first;
-        int ny = y + p.second;
+    vector<vector<unordered_map<char, bool>>> visited(11, vector<unordered_map<char, bool>>(11, unordered_map<char, bool>()));
+    pair<int, int> pos = { 5, 5 };
+    for (const char d : dirs) {
+        int x = pos.first;
+        int y = pos.second;
+        int nx = x + direction.at(d).first;
+        int ny = y + direction.at(d).second;
+        int rd = reverse_direction.at(d);
 
         if (nx >= 0 && nx < 11 && ny >= 0 && ny < 11) {
-            if (!visited[nx][ny][d]) {
-                visited[nx][ny][d] = true;
-                visited[x][y][rd] = true;
+            if (!visited[x][y][d]) {
+                visited[x][y][d] = true;
+                visited[nx][ny][rd] = true;
                 answer++;
             }
-            x = nx;
-            y = ny;
+            pos = { nx, ny };
         }
-
-        
     }
-
     return answer;
 }
 
 int main() {
-    string dirs = "ULURRDLLU";
+    string dirs = "LULLLLLLU";
     int result = solution(dirs);
     cout << result << '\n';
     return 0;
