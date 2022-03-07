@@ -4,10 +4,10 @@
 
 using namespace std;
 
-int CheckArr(const vector<vector<int>>& arr, int col, int row, int size) {
-    int result = arr[col][row];
-    for (int i = col; i < col + size; i++) {
-        for (int j = row; j < row + size; j++) {
+int check(const vector<vector<int>>& arr, int sx, int sy, int size) {
+    int result = arr[sy][sx];
+    for (int i = sy; i < sy + size; i++) {
+        for (int j = sx; j < sx + size; j++) {
             if (result != arr[i][j]) {
                 return -1;
             }
@@ -17,27 +17,26 @@ int CheckArr(const vector<vector<int>>& arr, int col, int row, int size) {
     return result;
 }
 
-void Quad(const vector<vector<int>>& arr, int col, int row, int size, vector<int>& answer) {
+void quad(const vector<vector<int>>& arr, int sx, int sy, int size, vector<int>& answer) {
     if (size == 1) {
-        answer[arr[col][row]]++;
+        answer[arr[sy][sx]]++;
         return;
     }
-
-    int check = CheckArr(arr, col, row, size);
-    if (check == -1) {
+    int i = check(arr, sx, sy, size);
+    if (i == -1) {
         int new_size = size / 2;
-        Quad(arr, col, row, new_size, answer);
-        Quad(arr, col + new_size, row, new_size, answer);
-        Quad(arr, col, row + new_size, new_size, answer);
-        Quad(arr, col + new_size, row + new_size, new_size, answer);
+        quad(arr, sx, sy, new_size, answer);
+        quad(arr, sx + new_size, sy, new_size, answer);
+        quad(arr, sx, sy + new_size, new_size, answer);
+        quad(arr, sx + new_size, sy + new_size, new_size, answer);
     } else {
-        answer[check]++;
+        answer[i]++;
     }
 }
 
 vector<int> solution(vector<vector<int>> arr) {
-    vector<int> answer(2, 0);
-    Quad(arr, 0, 0, arr.size(), answer);
+    vector<int> answer(2);
+    quad(arr, 0, 0, arr.size(), answer);
     return answer;
 }
 
