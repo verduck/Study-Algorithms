@@ -15,20 +15,17 @@ void TriangleSnail(vector<vector<int>>& triangle, int sx, int sy, int num, int s
         triangle[i][x] = num++;
     }
     y = size + sy - 1;
-    x++;
+    x = sx + 1;
     for (int i = x; i < size + sx; i++) {
         triangle[y][i] = num++;
     }
-    x = size + sx - 1;
-    y--;
-    x--;
+    x = size + sx - 2;
+    y = size + sy - 2;
     for (int i = y, j = x; i > sy && j > sx; i--, j--) {
         triangle[i][j] = num++;
-        x = j;
-        y = i;
     }
 
-    TriangleSnail(triangle, x, y + 1, num, size - 3);
+    TriangleSnail(triangle, sx + 1, sy + 2, num, size - 3);
 }
 
 vector<int> solution(int n) {
