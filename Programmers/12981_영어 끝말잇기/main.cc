@@ -17,7 +17,6 @@ vector<int> solution(int n, vector<string> words) {
             prev = s[s.size() - 1];
             turn++;
         } else {
-            cout << turn << '\n';
             answer[0] = (turn % n) + 1;
             answer[1] = (turn / n) + 1;
             break;
