@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void dfs(const vector<vector<int>>& tree, const vector<int>& info, vector<int> list, int n, int sheeps, int wolves, int *answer) {
+void dfs(const vector<vector<int>>& tree, const vector<int>& info, const vector<int>& list, int n, int sheeps, int wolves, int *answer) {
     sheeps += info[n] ^ 1;
     wolves += info[n];
     *answer = max(*answer, sheeps);
