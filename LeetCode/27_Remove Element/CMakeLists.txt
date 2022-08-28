@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(26)
+project(27)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(26 main.cc)
+add_executable(27 main.cc)
