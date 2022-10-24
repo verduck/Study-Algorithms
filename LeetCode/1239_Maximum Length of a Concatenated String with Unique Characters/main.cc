@@ -9,18 +9,17 @@ using namespace std;
 class Solution {
 private:
     void dfs(const vector<string>& arr, int* answer, string s, int depth) {
-        if (depth == arr.size()) {
-            *answer = max(*answer, static_cast<int>(s.size()));
+        if (unordered_set<char>(s.begin(), s.end()).size() != s.size()) {
             return;
         }
 
         *answer = max(*answer, static_cast<int>(s.size()));
+        if (depth == arr.size()) {
+            return;
+        }
 
         for (int i = depth; i < arr.size(); i++) {
-            string ns = s + arr[i];
-            if (unordered_set<char>(ns.begin(), ns.end()).size() == ns.size()) {
-                dfs(arr, answer, ns, i + 1);
-            }
+            dfs(arr, answer, s + arr[i], i + 1);
         }
     }
 public:
@@ -37,10 +36,7 @@ void init();
 
 int main() {
     vector<string> arr = {"abcdefghijklmnopqrstuvwxyz"};
-    vector<vector<int>> arr2 = {
-        { 1, 2, 3, 4 },
-        { 5, 6, 7, 8 }
-    };
+
     init();
 
     Solution solution;
