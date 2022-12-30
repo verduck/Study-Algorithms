@@ -16,7 +16,7 @@ int solution(vector<int> ingredient) {
             vector<int> temp(v.end() - 4, v.end());
             if (temp == hamburger) {
                 answer++;
-                v.assign(v.begin(), v.end() - 4);
+                v.erase(v.end() - 4, v.end());
             }
         }
     }
