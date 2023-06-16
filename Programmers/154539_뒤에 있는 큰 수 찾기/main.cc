@@ -1,25 +1,27 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
-int find_first_large_number_index(const vector<int>& numbers, int start_index, int n) {
-    for (int i = start_index; i < numbers.size(); i++) {
-        if (numbers[i] > n) {
-            return numbers[i];
-        }
-    }
-
-    return -1;
-}
-
 vector<int> solution(vector<int> numbers) {
-    vector<int> answer;
+    vector<int> answer(numbers.size(), 0);
+    stack<int> st;
 
     for (int i = 0; i < numbers.size(); i++) {
-        answer.push_back(find_first_large_number_index(numbers, i, numbers[i]));
+        while (!st.empty() && numbers[st.top()] < numbers[i]) {
+            answer[st.top()] = numbers[i];
+            st.pop();
+        }
+        st.push(i);
     }
+
+    while (!st.empty()) {
+        answer[st.top()] = -1;
+        st.pop();
+    }
+    
     return answer;
 }
 
